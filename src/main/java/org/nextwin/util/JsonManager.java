@@ -2,6 +2,8 @@ package org.nextwin.util;
 
 import java.io.IOException;
 
+import org.nextwin.protocol.Header;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,6 +22,23 @@ public class JsonManager {
 	}
 	
 	/**
+	 * 헤더를 직렬화, byte 배열의 길이를 26으로 맞춤
+	 * @param header
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	public static byte[] objectToBytes(Header header) throws JsonProcessingException {
+		String json = objectMapper.writeValueAsString(header);
+		
+		if(header.getMsgType() < 10)
+			json += ' ';
+		if(header.getLength() < 10)
+			json += ' ';
+		
+		return json.getBytes();
+	}
+	
+	/**
 	 * 객체를 역직렬화
 	 * @param bytes
 	 * @param classType
@@ -28,7 +47,6 @@ public class JsonManager {
 	 */
 	public static Object bytesToObject(byte[] bytes, Class<?> classType) throws IOException {
 		String json = new String(bytes);
-		System.out.println("json:" + json);
 		return objectMapper.readValue(json, classType);
 	}
 

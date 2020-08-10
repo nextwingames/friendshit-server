@@ -6,6 +6,13 @@ public class Header {
 	private int msgType;
 	private int length;
 	
+	public Header() {}
+	
+	public Header(int msgType, int length) {
+		this.msgType = msgType;
+		this.length = length;
+	}
+	
 	public int getMsgType() {
 		return msgType;
 	}

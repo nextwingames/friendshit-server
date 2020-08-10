@@ -81,20 +81,22 @@ public class NetworkManager {
 		if(receiver.read(head, 0, Protocol.HEADER_LENGTH) == -1)
 			return null;
 
-		Header header = new Header();
-		header = (Header)JsonManager.bytesToObject(head, Header.class);
-		
+		Header header = (Header)JsonManager.bytesToObject(head, Header.class);
 		return header;
 	}
 	
-	/**
-	 * 데이터 전송
-	 * @param value
-	 * @return Sending data size
-	 */
-	public int send(int value) {
-		byte[] data = BitConverter.intToBytes(value);
-		return data.length;
+	public void send(int msgType, Object object) throws IOException {
+		byte[] data = JsonManager.objectToBytes(object);
+		
+		Header header = new Header(msgType, data.length);
+		byte[] head = JsonManager.objectToBytes(header);
+		
+		// 최종 전송할 패킷(헤더 + 데이터) 직렬화
+		byte[] packet = new byte[head.length + data.length];
+		System.arraycopy(head, 0, packet, 0, head.length);
+		System.arraycopy(data, 0, packet, head.length, data.length);
+		
+		sender.write(packet);
 	}
 	
 	/**

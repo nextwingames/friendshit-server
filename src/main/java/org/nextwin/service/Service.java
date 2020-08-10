@@ -1,7 +1,14 @@
 package org.nextwin.service;
 
-public interface Service {
+import org.nextwin.net.NetworkManager;
+
+public abstract class Service {
+	protected NetworkManager networkManager;
 	
-	public void execute();
+	protected Service() {
+		networkManager = NetworkManager.getInstance();
+	}
+	
+	public abstract void execute();
 
 }
