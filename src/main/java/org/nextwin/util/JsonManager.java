@@ -28,7 +28,7 @@ public class JsonManager {
 	 */
 	public static Object bytesToObject(byte[] bytes, Class<?> classType) throws IOException {
 		String json = new String(bytes);
-		System.out.println("json: " + json);
+		System.out.println("json:" + json);
 		return objectMapper.readValue(json, classType);
 	}
 

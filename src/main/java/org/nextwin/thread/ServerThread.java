@@ -18,7 +18,7 @@ public abstract class ServerThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			service();
+			work();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -31,13 +31,13 @@ public abstract class ServerThread extends Thread {
 		}
 	}
 	
-	private void service() throws IOException {
+	private void work() throws IOException {
 		try {
 			enterServer();
 			networkManager.setSocket(socket);
 			
 			while(networkManager.isConnected()) {
-				work();
+				service();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,7 +47,7 @@ public abstract class ServerThread extends Thread {
 		}
 	}
 	
-	protected abstract void work() throws IOException;
+	protected abstract void service() throws IOException;
 	
 	protected abstract void enterServer();
 	

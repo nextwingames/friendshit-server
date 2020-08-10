@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import org.nextwin.protocol.Header;
+import org.nextwin.protocol.Protocol;
 import org.nextwin.util.BitConverter;
 import org.nextwin.util.JsonManager;
 
@@ -54,16 +56,35 @@ public class NetworkManager {
 	 * @return received data, null when fail
 	 * @throws IOException
 	 */
-	public byte[] receive() throws IOException {
+	public byte[] receive(int length) throws IOException {
 		if(socket.isClosed())
 			return null;
 		
 		// 현재는 50바이트 읽음
-		byte[] data = new byte[50];
-		if(receiver.read(data, 0, 50) == -1)
+		byte[] data = new byte[length];
+		if(receiver.read(data, 0, length) == -1)
 			return null;
 		
 		return data;
+	}
+	
+	/**
+	 * 헤더 수신
+	 * @return received header, null when fail
+	 * @throws IOException
+	 */
+	public Header receive() throws IOException{
+		if(socket.isClosed())
+			return null;
+		
+		byte[] head = new byte[Protocol.HEADER_LENGTH];
+		if(receiver.read(head, 0, Protocol.HEADER_LENGTH) == -1)
+			return null;
+
+		Header header = new Header();
+		header = (Header)JsonManager.bytesToObject(head, Header.class);
+		
+		return header;
 	}
 	
 	/**

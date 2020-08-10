@@ -13,7 +13,7 @@ public class GameServerThread extends ServerThread {
 	 * 게임 서버 작업
 	 */
 	@Override
-	protected void work() throws IOException {
+	protected void service() throws IOException {
 		
 	}
 	

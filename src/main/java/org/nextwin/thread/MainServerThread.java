@@ -3,8 +3,11 @@ package org.nextwin.thread;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.nextwin.protocol.TestProtocol;
-import org.nextwin.util.BitConverter;
+import org.nextwin.protocol.Header;
+import org.nextwin.protocol.Protocol;
+import org.nextwin.protocol.TestPacket;
+import org.nextwin.service.Service;
+import org.nextwin.service.TestService;
 import org.nextwin.util.JsonManager;
 
 public class MainServerThread extends ServerThread {
@@ -20,11 +23,21 @@ public class MainServerThread extends ServerThread {
 	 * 메인 서버 작업
 	 */
 	@Override
-	protected void work() throws IOException {
-		byte[] data = networkManager.receive();
-		TestProtocol testProtocol = (TestProtocol)JsonManager.bytesToObject(data, TestProtocol.class);
-		System.out.println("num: " + testProtocol.getNum() + ", str: " + testProtocol.getStr());
-		//networkManager.send(testProtocol);
+	protected void service() throws IOException {
+		Header header = networkManager.receive();
+		byte[] data = networkManager.receive(header.getLength());
+		
+		Service service;
+		switch (header.getMsgType()) {
+		case Protocol.TEST:
+			TestPacket packet = (TestPacket)JsonManager.bytesToObject(data, TestPacket.class);
+			service = new TestService((TestPacket)packet);
+			service.execute();
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	@Override
