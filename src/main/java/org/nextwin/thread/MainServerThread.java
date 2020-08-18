@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import org.nextwin.protocol.Header;
-import org.nextwin.protocol.Protocol;
+import org.nextwin.protocol.Protocols;
 import org.nextwin.protocol.TestPacket;
 import org.nextwin.service.Service;
 import org.nextwin.service.TestService;
@@ -29,7 +29,7 @@ public class MainServerThread extends ServerThread {
 		
 		Service service;
 		switch (header.getMsgType()) {
-		case Protocol.TEST:
+		case Protocols.TEST:
 			TestPacket packet = (TestPacket)JsonManager.bytesToObject(data, TestPacket.class);
 			service = new TestService((TestPacket)packet);
 			service.execute();

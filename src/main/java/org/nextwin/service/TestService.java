@@ -2,7 +2,7 @@ package org.nextwin.service;
 
 import java.io.IOException;
 
-import org.nextwin.protocol.Protocol;
+import org.nextwin.protocol.Protocols;
 import org.nextwin.protocol.TestPacket;
 
 public class TestService extends Service {
@@ -21,7 +21,7 @@ public class TestService extends Service {
 		testPacket.setStr("New String");
 		
 		try {
-			networkManager.send(Protocol.TEST, testPacket);
+			networkManager.send(Protocols.TEST, testPacket);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

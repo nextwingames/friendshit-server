@@ -2,6 +2,8 @@ package org.nextwin.protocol;
 
 
 public class Header {
+	
+	public static final int HEADER_LENGTH = 26;
 
 	private int msgType;
 	private int length;

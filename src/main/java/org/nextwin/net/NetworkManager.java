@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import org.nextwin.protocol.Header;
-import org.nextwin.protocol.Protocol;
+import org.nextwin.protocol.Protocols;
 import org.nextwin.util.BitConverter;
 import org.nextwin.util.JsonManager;
 
@@ -77,8 +77,8 @@ public class NetworkManager {
 		if(socket.isClosed())
 			return null;
 		
-		byte[] head = new byte[Protocol.HEADER_LENGTH];
-		if(receiver.read(head, 0, Protocol.HEADER_LENGTH) == -1)
+		byte[] head = new byte[Header.HEADER_LENGTH];
+		if(receiver.read(head, 0, Header.HEADER_LENGTH) == -1)
 			return null;
 
 		Header header = (Header)JsonManager.bytesToObject(head, Header.class);

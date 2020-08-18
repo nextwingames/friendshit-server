@@ -5,9 +5,8 @@ package org.nextwin.protocol;
  * @author hyeonQyu
  * 
  */
-public class Protocol {
+public class Protocols {
 
-	public static final int HEADER_LENGTH = 26;
 	public static final int TEST = 99;
 	
 }
