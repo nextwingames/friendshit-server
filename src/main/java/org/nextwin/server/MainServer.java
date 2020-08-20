@@ -36,11 +36,12 @@ public class MainServer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("서버 종료");
+			System.out.println("Main server terminated");
 		}
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Main server start");
 		MainServer server = new MainServer();
 		server.go();
 	}
