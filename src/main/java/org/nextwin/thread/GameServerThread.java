@@ -7,6 +7,7 @@ public class GameServerThread extends ServerThread {
 
 	public GameServerThread(Socket socket) {
 		super(socket);
+		System.out.println("Create game server thread");
 	}
 
 	/* 

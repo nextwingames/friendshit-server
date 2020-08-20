@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import org.nextwin.net.NetworkManager;
+import org.nextwin.protocol.Header;
 
 public abstract class ServerThread extends Thread {
 	
@@ -37,7 +38,9 @@ public abstract class ServerThread extends Thread {
 			networkManager.setSocket(socket);
 			
 			while(networkManager.isConnected()) {
-				service();
+				Header header = networkManager.receive();
+				byte[] data = networkManager.receive(header.getLength());
+				service(header, data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,7 +50,7 @@ public abstract class ServerThread extends Thread {
 		}
 	}
 	
-	protected abstract void service() throws IOException;
+	protected abstract void service(Header header, byte[] data) throws IOException;
 	
 	protected abstract void enterServer();
 	

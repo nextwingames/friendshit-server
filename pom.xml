@@ -32,7 +32,7 @@
 		            <manifest>
 		                <addClasspath>true</addClasspath>
 		                <classpathPrefix>lib/</classpathPrefix>
-		                <mainClass>org.nextwin.server.MainServer</mainClass>
+		                <mainClass>org.nextwin.server.LocalServer</mainClass>
 		            </manifest>
 		        </archive>
 		    </configuration>

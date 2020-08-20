@@ -17,16 +17,14 @@ public class MainServerThread extends ServerThread {
 	 */
 	public MainServerThread(Socket socket) {
 		super(socket);
+		System.out.println("Main server thread created");
 	}
 	
 	/**
 	 * 메인 서버 작업
 	 */
 	@Override
-	protected void service() throws IOException {
-		Header header = networkManager.receive();
-		byte[] data = networkManager.receive(header.getLength());
-		
+	protected void service(Header header, byte[] data) throws IOException {
 		Service service;
 		switch (header.getMsgType()) {
 		case Protocols.TEST:
@@ -42,12 +40,12 @@ public class MainServerThread extends ServerThread {
 	
 	@Override
 	protected void enterServer() {
-		System.out.println("접속");
+		System.out.println("Connected to main server");
 	}
 
 	@Override
 	protected void exitServer() {
-		System.out.println("퇴장");
+		System.out.println("Quit main server");
 	}
 
 }
