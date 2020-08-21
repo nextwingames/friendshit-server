@@ -19,9 +19,9 @@ public class LocalServerThread extends ServerThread {
 	}
 
 	@Override
-	protected void service(Header header, byte[] data) throws IOException {
+	protected void service(int msgType, byte[] data) throws IOException {
 		Service service;
-		switch (header.getMsgType()) {
+		switch (msgType) {
 		
 		}
 	}

@@ -24,9 +24,9 @@ public class MainServerThread extends ServerThread {
 	 * 메인 서버 작업
 	 */
 	@Override
-	protected void service(Header header, byte[] data) throws IOException {
+	protected void service(int msgType, byte[] data) throws IOException {
 		Service service;
-		switch (header.getMsgType()) {
+		switch (msgType) {
 		case Protocols.TEST:
 			TestPacket packet = (TestPacket)JsonManager.bytesToObject(data, TestPacket.class);
 			service = new TestService((TestPacket)packet);

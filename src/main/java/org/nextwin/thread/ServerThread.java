@@ -40,7 +40,7 @@ public abstract class ServerThread extends Thread {
 			while(networkManager.isConnected()) {
 				Header header = networkManager.receive();
 				byte[] data = networkManager.receive(header.getLength());
-				service(header, data);
+				service(header.getMsgType(), data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public abstract class ServerThread extends Thread {
 		}
 	}
 	
-	protected abstract void service(Header header, byte[] data) throws IOException;
+	protected abstract void service(int msgType, byte[] data) throws IOException;
 	
 	protected abstract void enterServer();
 	

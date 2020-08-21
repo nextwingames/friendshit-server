@@ -3,6 +3,8 @@ package org.nextwin.thread;
 import java.io.IOException;
 import java.net.Socket;
 
+import org.nextwin.protocol.Header;
+
 public class GameServerThread extends ServerThread {
 
 	public GameServerThread(Socket socket) {
@@ -14,7 +16,8 @@ public class GameServerThread extends ServerThread {
 	 * 게임 서버 작업
 	 */
 	@Override
-	protected void service() throws IOException {
+	protected void service(int msgType, byte[] data) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 	

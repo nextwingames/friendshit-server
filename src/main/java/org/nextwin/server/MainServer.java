@@ -2,6 +2,7 @@ package org.nextwin.server;
 
 import java.net.Socket;
 
+import org.nextwin.net.NetworkManager;
 import org.nextwin.thread.MainServerThread;
 import org.nextwin.thread.ServerThread;
 
@@ -24,7 +25,7 @@ public class MainServer extends Server {
 
 	@Override
 	protected int getPort() {
-		return 8899;
+		return NetworkManager.MAIN_PORT;
 	}
 	
 }

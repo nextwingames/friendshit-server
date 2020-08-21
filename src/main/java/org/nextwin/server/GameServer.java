@@ -2,6 +2,7 @@ package org.nextwin.server;
 
 import java.net.Socket;
 
+import org.nextwin.net.NetworkManager;
 import org.nextwin.thread.GameServerThread;
 import org.nextwin.thread.ServerThread;
 
@@ -27,7 +28,7 @@ public class GameServer extends Server {
 	 */
 	@Override
 	protected int getPort() {
-		return 9000;
+		return NetworkManager.GAME_PORT;
 	}
 
 }
