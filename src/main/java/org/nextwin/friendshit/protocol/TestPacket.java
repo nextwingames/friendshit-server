@@ -1,4 +1,4 @@
-package org.nextwin.protocol;
+package org.nextwin.friendshit.protocol;
 
 public class TestPacket {
 	

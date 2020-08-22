@@ -1,9 +1,10 @@
-package org.nextwin.service;
+package org.nextwin.friendshit.service;
 
 import java.io.IOException;
 
-import org.nextwin.protocol.Protocols;
-import org.nextwin.protocol.TestPacket;
+import org.nextwin.friendshit.protocol.Protocols;
+import org.nextwin.friendshit.protocol.TestPacket;
+import org.nextwin.service.Service;
 
 public class TestService extends Service {
 	

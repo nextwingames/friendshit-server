@@ -1,9 +1,10 @@
-package org.nextwin.server;
+package org.nextwin.friendshit.server;
 
 import java.net.Socket;
 
+import org.nextwin.friendshit.thread.LocalServerThread;
 import org.nextwin.net.NetworkManager;
-import org.nextwin.thread.LocalServerThread;
+import org.nextwin.server.Server;
 import org.nextwin.thread.ServerThread;
 
 public class LocalServer extends Server {

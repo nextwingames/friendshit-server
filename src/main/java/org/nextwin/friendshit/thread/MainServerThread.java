@@ -1,13 +1,14 @@
-package org.nextwin.thread;
+package org.nextwin.friendshit.thread;
 
 import java.io.IOException;
 import java.net.Socket;
 
+import org.nextwin.friendshit.protocol.Protocols;
+import org.nextwin.friendshit.protocol.TestPacket;
+import org.nextwin.friendshit.service.TestService;
 import org.nextwin.protocol.Header;
-import org.nextwin.protocol.Protocols;
-import org.nextwin.protocol.TestPacket;
 import org.nextwin.service.Service;
-import org.nextwin.service.TestService;
+import org.nextwin.thread.ServerThread;
 import org.nextwin.util.JsonManager;
 
 public class MainServerThread extends ServerThread {
@@ -37,15 +38,16 @@ public class MainServerThread extends ServerThread {
 			break;
 		}
 	}
-	
+
 	@Override
-	protected void enterServer() {
-		System.out.println("Connected to main server");
+	protected void onEnterServer() {
+		System.out.println("Connect to main server");
 	}
 
 	@Override
-	protected void exitServer() {
-		System.out.println("Quit main server");
+	protected void onCloseServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

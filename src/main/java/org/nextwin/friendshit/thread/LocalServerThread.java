@@ -1,10 +1,10 @@
-package org.nextwin.thread;
+package org.nextwin.friendshit.thread;
 
 import java.io.IOException;
 import java.net.Socket;
 
-import org.nextwin.protocol.Header;
 import org.nextwin.service.Service;
+import org.nextwin.thread.ServerThread;
 
 /**
  * DB를 사용하지 않는 로컬 서버
@@ -27,13 +27,15 @@ public class LocalServerThread extends ServerThread {
 	}
 
 	@Override
-	protected void enterServer() {
-		System.out.println("Connected to local server");
+	protected void onEnterServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	protected void exitServer() {
-		System.out.println("Quit local server");
+	protected void onCloseServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

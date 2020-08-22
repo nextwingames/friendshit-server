@@ -1,4 +1,4 @@
-package org.nextwin.protocol;
+package org.nextwin.friendshit.protocol;
 
 /**
  * 헤더 번호 모음 (0 ~ 99만 사용)

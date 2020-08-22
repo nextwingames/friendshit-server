@@ -1,9 +1,9 @@
-package org.nextwin.thread;
+package org.nextwin.friendshit.thread;
 
 import java.io.IOException;
 import java.net.Socket;
 
-import org.nextwin.protocol.Header;
+import org.nextwin.thread.ServerThread;
 
 public class GameServerThread extends ServerThread {
 
@@ -20,15 +20,17 @@ public class GameServerThread extends ServerThread {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
-	protected void enterServer() {
-				
+	protected void onEnterServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	protected void exitServer() {
-				
+	protected void onCloseServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
