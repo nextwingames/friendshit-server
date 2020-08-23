@@ -3,8 +3,10 @@ package org.nextwin.friendshit.thread;
 import java.io.IOException;
 import java.net.Socket;
 
-import org.nextwin.friendshit.protocol.Protocols;
+import org.nextwin.friendshit.protocol.Protocol;
+import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
 import org.nextwin.friendshit.protocol.TestPacket;
+import org.nextwin.friendshit.service.RegisterService;
 import org.nextwin.friendshit.service.TestService;
 import org.nextwin.protocol.Header;
 import org.nextwin.service.Service;
@@ -28,9 +30,9 @@ public class MainServerThread extends ServerThread {
 	protected void service(int msgType, byte[] data) throws IOException {
 		Service service;
 		switch (msgType) {
-		case Protocols.TEST:
-			TestPacket packet = (TestPacket)JsonManager.bytesToObject(data, TestPacket.class);
-			service = new TestService((TestPacket)packet);
+		case Protocol.REGISTER:
+			ReceivingRegisterPacket packet = (ReceivingRegisterPacket)JsonManager.bytesToObject(data, ReceivingRegisterPacket.class);
+			service = new RegisterService(packet);
 			service.execute();
 			break;
 
