@@ -5,8 +5,9 @@ package org.nextwin.friendshit.protocol;
  * @author hyeonQyu
  * 
  */
-public class Protocols {
+public class Protocol {
 
+	public static final int REGISTER = 16;
 	public static final int TEST = 99;
 	
 }

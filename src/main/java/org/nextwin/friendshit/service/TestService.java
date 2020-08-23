@@ -2,7 +2,7 @@ package org.nextwin.friendshit.service;
 
 import java.io.IOException;
 
-import org.nextwin.friendshit.protocol.Protocols;
+import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.TestPacket;
 import org.nextwin.service.Service;
 
@@ -21,11 +21,7 @@ public class TestService extends Service {
 		testPacket.setData(testPacket.getData() + 1);
 		testPacket.setStr("New String");
 		
-		try {
-			networkManager.send(Protocols.TEST, testPacket);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//networkManager.send(Protocol.REGISTER, object);
 	}
 
 }
