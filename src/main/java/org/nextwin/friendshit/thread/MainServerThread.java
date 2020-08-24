@@ -47,9 +47,8 @@ public class MainServerThread extends ServerThread {
 	}
 
 	@Override
-	protected void onCloseServer() {
-		// TODO Auto-generated method stub
-		
+	protected void onExitServer() {
+		System.out.println("Close main server thread");		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import org.nextwin.dto.MemberDto;
+import org.nextwin.friendshit.service.RegisterService;
 
 public class MemberDao {
 	
@@ -22,6 +23,7 @@ public class MemberDao {
 		PreparedStatement preparedStatement = null;
 		int ri = 0;
 		
+		System.out.println("ID: " + dto.getId() + ", Nickname: " + dto.getNickname() + " ---- ");
 		try {
 			connection = getConnection();
 			String sql = "insert into member (id, nickname, pw, mail) values (?, ?, ?, ?)";
@@ -33,8 +35,12 @@ public class MemberDao {
 			preparedStatement.setString(4, dto.getMail());
 			
 			ri = preparedStatement.executeUpdate();
+			System.out.println("Success to register");
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Failed to register");
+			if(e.toString().contains("PRIMARY"))
+				ri = RegisterService.REGISTER_FAIL_ID;
 		} finally {
 			try {
 				if(preparedStatement != null)

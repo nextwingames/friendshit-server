@@ -33,7 +33,7 @@ public class LocalServerThread extends ServerThread {
 	}
 
 	@Override
-	protected void onCloseServer() {
+	protected void onExitServer() {
 		// TODO Auto-generated method stub
 		
 	}

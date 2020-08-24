@@ -9,12 +9,19 @@ import org.nextwin.service.Service;
 
 public class RegisterService extends Service {
 	
+	public static final int REGISTER_FAIL_NICKNAME = 0;
+	public static final int REGISTER_FAIL_ID = -1;
+	public static final int REGISTER_SUCCESS = 1;
+	
 	private ReceivingRegisterPacket receivingRegisterPacket;
 	
 	public RegisterService(ReceivingRegisterPacket packet) {
 		receivingRegisterPacket = packet;
 	}
 
+	/**
+	 * 회원가입 후 성공 여부를 클라이언트에게 반환
+	 */
 	@Override
 	public void execute() {
 		MemberDto dto = new MemberDto();
@@ -23,19 +30,9 @@ public class RegisterService extends Service {
 		dto.setPw(receivingRegisterPacket.getPw());
 		dto.setMail(receivingRegisterPacket.getMail());
 		
-		MemberDao dao = new MemberDao();
+		MemberDao dao = new MemberDao();		
 		SendingRegisterPacket sendingRegisterPacket = new SendingRegisterPacket();
-		System.out.print("Id: " + dto.getId() + ", Nickname: " + dto.getNickname() + " --- ");
-		// 실패
-		if(dao.register(dto) == 0) {
-			sendingRegisterPacket.setIsSuccess(false);
-			System.out.println("Failed to register");
-		}
-		// 성공
-		else { 
-			sendingRegisterPacket.setIsSuccess(true);
-			System.out.println("Success to register");
-		}
+		sendingRegisterPacket.setResult(dao.register(dto));
 		sendingRegisterPacket.setId(dto.getId());
 		
 		networkManager.send(Protocol.REGISTER, sendingRegisterPacket);			

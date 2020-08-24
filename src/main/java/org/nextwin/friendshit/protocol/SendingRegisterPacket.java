@@ -2,15 +2,15 @@ package org.nextwin.friendshit.protocol;
 
 public class SendingRegisterPacket {
 	
-	private boolean isSuccess;
+	private int result;
 	private String id;
 	
-	public boolean getIsSuccess() {
-		return isSuccess;
+	public int getResult() {
+		return result;
 	}
 	
-	public void setIsSuccess(boolean isSuccess) {
-		this.isSuccess = isSuccess;
+	public void setResult(int result) {
+		this.result = result;
 	}
 	
 	public String getId() {
