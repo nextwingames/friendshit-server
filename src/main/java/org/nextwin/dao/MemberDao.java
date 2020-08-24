@@ -37,7 +37,6 @@ public class MemberDao {
 			ri = preparedStatement.executeUpdate();
 			System.out.println("Success to register");
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Failed to register");
 			if(e.toString().contains("PRIMARY"))
 				ri = RegisterService.REGISTER_FAIL_ID;

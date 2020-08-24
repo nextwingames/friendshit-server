@@ -48,7 +48,7 @@ public class MainServerThread extends ServerThread {
 
 	@Override
 	protected void onExitServer() {
-		System.out.println("Close main server thread");		
+		System.out.println("Exit main server");		
 	}
 
 }
