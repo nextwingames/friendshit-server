@@ -1,6 +1,8 @@
 package org.nextwin.friendshit.protocol;
 
-public class ReceivingRegisterPacket {
+import org.nextwin.protocol.Packet;
+
+public class ReceivingRegisterPacket implements Packet{
 	
 	private String nickname;
 	private String id;

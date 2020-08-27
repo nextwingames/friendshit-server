@@ -2,18 +2,10 @@ package org.nextwin.friendshit.protocol;
 
 import org.nextwin.protocol.Packet;
 
-public class SendingRegisterPacket implements Packet {
+public class ReceivingLoginPacket implements Packet {
 	
-	private int result;
 	private String id;
-	
-	public int getResult() {
-		return result;
-	}
-	
-	public void setResult(int result) {
-		this.result = result;
-	}
+	private String pw;
 	
 	public String getId() {
 		return id;
@@ -21,6 +13,14 @@ public class SendingRegisterPacket implements Packet {
 	
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getPw() {
+		return pw;
+	}
+	
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 
 }

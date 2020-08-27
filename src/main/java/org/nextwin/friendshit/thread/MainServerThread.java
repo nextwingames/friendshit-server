@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.net.Socket;
 
 import org.nextwin.friendshit.protocol.Protocol;
+import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
-import org.nextwin.friendshit.protocol.TestPacket;
+import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
-import org.nextwin.friendshit.service.TestService;
-import org.nextwin.protocol.Header;
+import org.nextwin.protocol.Packet;
 import org.nextwin.service.Service;
 import org.nextwin.thread.ServerThread;
 import org.nextwin.util.JsonManager;
@@ -29,13 +29,20 @@ public class MainServerThread extends ServerThread {
 	@Override
 	protected void service(int msgType, byte[] data) throws IOException {
 		Service service;
+		Packet packet;
 		switch (msgType) {
 		case Protocol.REGISTER:
-			ReceivingRegisterPacket packet = (ReceivingRegisterPacket)JsonManager.bytesToObject(data, ReceivingRegisterPacket.class);
+			packet = (ReceivingRegisterPacket)JsonManager.bytesToObject(data, ReceivingRegisterPacket.class);
 			service = new RegisterService(packet);
 			service.execute();
 			break;
-
+			
+		case Protocol.LOGIN:
+			packet = (ReceivingLoginPacket)JsonManager.bytesToObject(data, ReceivingLoginPacket.class);
+			service = new LoginService(packet);
+			service.execute();
+			break;
+			
 		default:
 			break;
 		}
