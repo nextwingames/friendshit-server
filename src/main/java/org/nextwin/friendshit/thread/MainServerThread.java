@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.Socket;
 
 import org.nextwin.friendshit.protocol.Protocol;
+import org.nextwin.friendshit.protocol.ReceivingChatPacket;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
+import org.nextwin.friendshit.service.LobbyChatService;
 import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
 import org.nextwin.protocol.Packet;
@@ -40,6 +42,12 @@ public class MainServerThread extends ServerThread {
 		case Protocol.LOGIN:
 			packet = (ReceivingLoginPacket)JsonManager.bytesToObject(data, ReceivingLoginPacket.class);
 			service = new LoginService(packet);
+			service.execute();
+			break;
+			
+		case Protocol.LOBBY_CHAT:
+			packet = (ReceivingChatPacket)JsonManager.bytesToObject(data, ReceivingChatPacket.class);
+			service = new LobbyChatService(packet);
 			service.execute();
 			break;
 			
