@@ -5,6 +5,7 @@ import org.nextwin.dto.MemberDto;
 import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.SendingLoginPacket;
+import org.nextwin.friendshit.server.MainServer;
 import org.nextwin.protocol.Packet;
 import org.nextwin.service.Service;
 
@@ -32,7 +33,9 @@ public class LoginService extends Service {
 		
 		MemberDao dao = new MemberDao();
 		SendingLoginPacket sendingLoginPacket = new SendingLoginPacket();
-		sendingLoginPacket.setResult(dao.login(dto));
+		int result = dao.login(dto);
+		
+		sendingLoginPacket.setResult(result);
 		sendingLoginPacket.setId(dto.getId());
 		sendingLoginPacket.setNickname(dto.getNickname());
 		sendingLoginPacket.setTotalGame(dto.getTotalGame());
@@ -41,6 +44,10 @@ public class LoginService extends Service {
 		sendingLoginPacket.setBronze(dto.getBronze());
 		
 		networkManager.send(Protocol.LOGIN, sendingLoginPacket);
+		
+		if(result == LOGIN_SUCCESS) {
+			MainServer.connectedUsers.put(dto.getId(), networkManager);
+		}
 	}
 
 }
