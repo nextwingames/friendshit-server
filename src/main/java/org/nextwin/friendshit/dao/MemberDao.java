@@ -1,11 +1,11 @@
-package org.nextwin.dao;
+package org.nextwin.friendshit.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.nextwin.dto.MemberDto;
+import org.nextwin.friendshit.dto.MemberDto;
 import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
 import org.nextwin.util.Logger;

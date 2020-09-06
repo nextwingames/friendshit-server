@@ -5,8 +5,10 @@ import java.net.Socket;
 
 import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingChatPacket;
+import org.nextwin.friendshit.protocol.ReceivingCreateRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
+import org.nextwin.friendshit.service.CreateRoomService;
 import org.nextwin.friendshit.service.LobbyChatService;
 import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
@@ -48,6 +50,12 @@ public class MainServerThread extends ServerThread {
 		case Protocol.LOBBY_CHAT:
 			packet = (ReceivingChatPacket)JsonManager.bytesToObject(data, ReceivingChatPacket.class);
 			service = new LobbyChatService(packet);
+			service.execute();
+			break;
+			
+		case Protocol.CREATE_ROOM:
+			packet = (ReceivingCreateRoomPacket)JsonManager.bytesToObject(data, ReceivingCreateRoomPacket.class);
+			service = new CreateRoomService(packet);
 			service.execute();
 			break;
 			

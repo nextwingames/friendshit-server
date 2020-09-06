@@ -1,7 +1,7 @@
 package org.nextwin.friendshit.service;
 
-import org.nextwin.dao.MemberDao;
-import org.nextwin.dto.MemberDto;
+import org.nextwin.friendshit.dao.MemberDao;
+import org.nextwin.friendshit.dto.MemberDto;
 import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.SendingLoginPacket;

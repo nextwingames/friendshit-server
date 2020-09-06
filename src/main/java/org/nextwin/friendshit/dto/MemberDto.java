@@ -1,4 +1,4 @@
-package org.nextwin.dto;
+package org.nextwin.friendshit.dto;
 
 public class MemberDto {
 	
