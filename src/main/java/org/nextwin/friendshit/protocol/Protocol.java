@@ -11,5 +11,6 @@ public class Protocol {
 	public static final int LOGIN = 17;
 	public static final int LOBBY_CHAT = 18;
 	public static final int CREATE_ROOM = 19;
+	public static final int ENTER_ROOM = 20;
 	
 }

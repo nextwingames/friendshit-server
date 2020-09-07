@@ -1,5 +1,7 @@
 package org.nextwin.friendshit.room;
 
+import java.util.LinkedList;
+
 import org.nextwin.friendshit.server.MainServer;
 
 public class Room {
@@ -15,11 +17,12 @@ public class Room {
 	private int maxPeople;
 	private int map;
 	private boolean status;
+	private LinkedList<String> players = new LinkedList<String>();
 	
 	public Room(String name, int maxPeople, int map) {
 		id = ++MainServer.roomId;
 		this.name = name;
-		headcount = 1;
+		headcount = 0;
 		this.maxPeople = maxPeople;
 		this.map = map;
 		status = WAITING;
@@ -55,6 +58,15 @@ public class Room {
 	
 	public void setStatus(boolean status) {
 		this.status = status; 
+	}
+	
+	public void addPlayer(String nickname) {
+		players.add(nickname);
+		headcount++;
+	}
+	
+	public boolean isFull() {
+		return headcount == maxPeople;
 	}
 
 	public String getRoomInfo() {

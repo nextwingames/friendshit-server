@@ -28,7 +28,7 @@ public class CreateRoomService extends Service {
 		Room room = new Room(name, maxPeople, map);
 		MainServer.rooms.put(room.getId(), room);
 		
-		networkManager.send(Protocol.CREATE_ROOM, new SendingCreateRoomPacket(room));
+		networkManager.send(Protocol.CREATE_ROOM, new SendingCreateRoomPacket(room.getId()));
 		Logger.log("CREATE_ROOM", room.getRoomInfo());
 	}
 

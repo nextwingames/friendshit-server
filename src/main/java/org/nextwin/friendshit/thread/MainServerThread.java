@@ -6,9 +6,11 @@ import java.net.Socket;
 import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingChatPacket;
 import org.nextwin.friendshit.protocol.ReceivingCreateRoomPacket;
+import org.nextwin.friendshit.protocol.ReceivingEnterRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
 import org.nextwin.friendshit.service.CreateRoomService;
+import org.nextwin.friendshit.service.EnterRoomService;
 import org.nextwin.friendshit.service.LobbyChatService;
 import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
@@ -32,36 +34,41 @@ public class MainServerThread extends ServerThread {
 	 */
 	@Override
 	protected void service(int msgType, byte[] data) throws IOException {
-		Service service;
+		Service service = null;
 		Packet packet;
+		
 		switch (msgType) {
 		case Protocol.REGISTER:
 			packet = (ReceivingRegisterPacket)JsonManager.bytesToObject(data, ReceivingRegisterPacket.class);
 			service = new RegisterService(packet);
-			service.execute();
 			break;
 			
 		case Protocol.LOGIN:
 			packet = (ReceivingLoginPacket)JsonManager.bytesToObject(data, ReceivingLoginPacket.class);
 			service = new LoginService(packet);
-			service.execute();
 			break;
 			
 		case Protocol.LOBBY_CHAT:
 			packet = (ReceivingChatPacket)JsonManager.bytesToObject(data, ReceivingChatPacket.class);
 			service = new LobbyChatService(packet);
-			service.execute();
 			break;
 			
 		case Protocol.CREATE_ROOM:
 			packet = (ReceivingCreateRoomPacket)JsonManager.bytesToObject(data, ReceivingCreateRoomPacket.class);
 			service = new CreateRoomService(packet);
-			service.execute();
+			break;
+			
+		case Protocol.ENTER_ROOM:
+			packet = (ReceivingEnterRoomPacket)JsonManager.bytesToObject(data, ReceivingEnterRoomPacket.class);
+			service = new EnterRoomService(packet);
 			break;
 			
 		default:
 			break;
 		}
+		
+		if(service != null)
+			service.execute();
 	}
 
 	@Override
