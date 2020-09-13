@@ -7,10 +7,12 @@ import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingChatPacket;
 import org.nextwin.friendshit.protocol.ReceivingCreateRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingEnterRoomPacket;
+import org.nextwin.friendshit.protocol.ReceivingExitRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
 import org.nextwin.friendshit.service.CreateRoomService;
 import org.nextwin.friendshit.service.EnterRoomService;
+import org.nextwin.friendshit.service.ExitRoomService;
 import org.nextwin.friendshit.service.LobbyChatService;
 import org.nextwin.friendshit.service.LoginService;
 import org.nextwin.friendshit.service.RegisterService;
@@ -61,6 +63,11 @@ public class MainServerThread extends ServerThread {
 		case Protocol.ENTER_ROOM:
 			packet = (ReceivingEnterRoomPacket)JsonManager.bytesToObject(data, ReceivingEnterRoomPacket.class);
 			service = new EnterRoomService(packet);
+			break;
+			
+		case Protocol.EXIT_ROOM:
+			packet = (ReceivingExitRoomPacket)JsonManager.bytesToObject(data, ReceivingExitRoomPacket.class);
+			service = new ExitRoomService(packet);
 			break;
 			
 		default:

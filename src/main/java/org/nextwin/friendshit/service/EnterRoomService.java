@@ -7,6 +7,7 @@ import org.nextwin.friendshit.room.Room;
 import org.nextwin.friendshit.server.MainServer;
 import org.nextwin.protocol.Packet;
 import org.nextwin.service.Service;
+import org.nextwin.util.Logger;
 
 public class EnterRoomService extends Service {
 	
@@ -37,8 +38,9 @@ public class EnterRoomService extends Service {
 			room.addPlayer(nickname);
 			sendingEnterRoomPacket = new SendingEnterRoomPacket(room);
 		}
-		
+				
 		networkManager.send(Protocol.ENTER_ROOM, sendingEnterRoomPacket);
+		Logger.log("ENTER_ROOM", room.getRoomInfo());
 	}
 
 }

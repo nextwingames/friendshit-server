@@ -1,5 +1,6 @@
 package org.nextwin.friendshit.room;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.nextwin.friendshit.server.MainServer;
@@ -60,9 +61,34 @@ public class Room {
 		this.status = status; 
 	}
 	
+	public String[] playersToArray() {
+		String[] array = new String[headcount];
+		
+		int index = 0;
+		Iterator<String> iterator = players.iterator();
+		while(iterator.hasNext())
+			array[index] = iterator.next();
+		
+		return array;
+	}
+	
 	public void addPlayer(String nickname) {
 		players.add(nickname);
 		headcount++;
+	}
+	
+	public void removePlayer(String nickname) {
+		Iterator<String> iterator = players.iterator();
+		int index = 0;
+		while(iterator.hasNext()) {
+			if(iterator.next().equals(nickname)) {
+				players.remove(index);
+				break;
+			}
+			index++;
+		}
+		
+		headcount--;
 	}
 	
 	public boolean isFull() {
@@ -80,10 +106,15 @@ public class Room {
 			break;
 		}
 		
-		String statuString = status ? "Playing" : "Waiting";
+		StringBuilder playersInfo = new StringBuilder();
+		Iterator<String> iterator = players.iterator();
+		int i = 0;
+		while(iterator.hasNext())
+			playersInfo.append(" (" + ++i + ")" + iterator.next());
 		
+		String statusString = status ? "Playing" : "Waiting";
 		return "id: " + id + ", name: " + name + ", headcount: " + headcount + ", maxPeople: " + maxPeople
-														+ ", map: " + mapString + ", status: " + statuString;
+				 + ", map: " + mapString + ", status: " + statusString + "\n               players:" + playersInfo;
 	}
 
 }

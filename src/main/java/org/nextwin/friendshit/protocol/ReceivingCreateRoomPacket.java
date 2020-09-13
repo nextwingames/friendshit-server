@@ -7,7 +7,8 @@ public class ReceivingCreateRoomPacket implements Packet {
 	private String name;
 	private int maxPeople;
 	private int map;
-	
+	private String nickname;
+
 	public String getName() {
 		return name;
 	}
@@ -31,5 +32,13 @@ public class ReceivingCreateRoomPacket implements Packet {
 	public void setMap(int map) {
 		this.map = map;
 	}	
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 }
