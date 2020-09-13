@@ -4,8 +4,11 @@ import org.nextwin.friendshit.dao.MemberDao;
 import org.nextwin.friendshit.dto.MemberDto;
 import org.nextwin.friendshit.protocol.Protocol;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
+import org.nextwin.friendshit.protocol.SendingLobbyPacket;
 import org.nextwin.friendshit.protocol.SendingLoginPacket;
+import org.nextwin.friendshit.room.Room;
 import org.nextwin.friendshit.server.MainServer;
+import org.nextwin.friendshit.thread.MainServerThread;
 import org.nextwin.protocol.Packet;
 import org.nextwin.service.Service;
 
@@ -16,6 +19,7 @@ public class LoginService extends Service {
 	public static final int LOGIN_SUCCESS = 1;
 	
 	private ReceivingLoginPacket receivingLoginPacket;
+	private String playerId;
 	
 	public LoginService(Packet packet) {
 		super(packet);
@@ -46,8 +50,17 @@ public class LoginService extends Service {
 		networkManager.send(Protocol.LOGIN, sendingLoginPacket);
 		
 		if(result == LOGIN_SUCCESS) {
-			MainServer.connectedUsers.put(dto.getId(), networkManager);
+			playerId = dto.getId();
+			MainServer.connectedUsers.put(playerId, networkManager);
+			
+			// 첫 번째 페이지의 방 리스트
+			Room[] rooms = MainServer.getPageRooms(0);
+			networkManager.send(Protocol.LOBBY, new SendingLobbyPacket(rooms));
 		}
+	}
+	
+	public String getPlayerId() {
+		return playerId;
 	}
 
 }

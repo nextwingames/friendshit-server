@@ -21,7 +21,7 @@ public class Room {
 	private LinkedList<String> players = new LinkedList<String>();
 	
 	public Room(String name, int maxPeople, int map) {
-		id = ++MainServer.roomId;
+		id = MainServer.freeRoomId.isEmpty() ? ++MainServer.roomId : MainServer.freeRoomId.poll();
 		this.name = name;
 		headcount = 0;
 		this.maxPeople = maxPeople;

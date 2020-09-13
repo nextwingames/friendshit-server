@@ -10,6 +10,7 @@ import org.nextwin.friendshit.protocol.ReceivingEnterRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingExitRoomPacket;
 import org.nextwin.friendshit.protocol.ReceivingLoginPacket;
 import org.nextwin.friendshit.protocol.ReceivingRegisterPacket;
+import org.nextwin.friendshit.server.MainServer;
 import org.nextwin.friendshit.service.CreateRoomService;
 import org.nextwin.friendshit.service.EnterRoomService;
 import org.nextwin.friendshit.service.ExitRoomService;
@@ -22,6 +23,8 @@ import org.nextwin.thread.ServerThread;
 import org.nextwin.util.JsonManager;
 
 public class MainServerThread extends ServerThread {
+	
+	private String playerId;
 
 	/** 
 	 * 메인 서버 작업 쓰레드
@@ -85,7 +88,8 @@ public class MainServerThread extends ServerThread {
 
 	@Override
 	protected void onExitServer() {
-		System.out.println("Exit main server");		
+		System.out.println(playerId + " exits main server");
+		MainServer.connectedUsers.remove(playerId);
 	}
 
 }

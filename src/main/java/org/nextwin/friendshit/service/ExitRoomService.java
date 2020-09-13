@@ -27,7 +27,7 @@ public class ExitRoomService extends Service {
 		
 		// 아무도 없으면 방 삭제
 		if(room.getHeadcount() == 0)
-			MainServer.rooms.remove(roomId);
+			MainServer.removeRoom(roomId);
 	}
 
 }
